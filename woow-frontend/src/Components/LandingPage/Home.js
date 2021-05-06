@@ -3,15 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
-import Chip from '@material-ui/core/Chip';
+import TextField from '@material-ui/core/TextField';
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import ProjectCards from './ProjectCard';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +51,77 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export default function Home() {
+  const classes = useStyles();
+
+  return (
+    <React.Fragment>
+      <CssBaseline />     
+      {/* <header className="App-header"> */}
+       <Container maxWidth="lg">
+        <Header title="WooW Analytics" sections={sections} />
+        <main>
+        <MainFeaturedPost post={mainFeaturedPost} />
+
+        <TextField 
+                id="standard-basic"
+                variant="outlined"
+                multiline
+                style={{ margin: 40, width: 700}}
+                placeholder="WooW Project Repository Search"
+                // onChange = {(e) => setValue(e.target.value)} 
+                InputProps={{
+                    endAdornment: (
+                    <InputAdornment>
+                        <IconButton>
+                        <SearchIcon /> {/* onClick={handleCategory} */}
+                        </IconButton>
+                    </InputAdornment>
+                    )
+                }}
+          />
+
+        <Container className={classes.cardGrid} maxWidth="lg">
+          <Typography component="h1" variant="h3" style={{color: '#006400'}} gutterBottom>
+              <i>Live Projects</i>
+          </Typography>
+          <Grid container spacing={4}>
+            {liveProjects.map((card) => (
+              <ProjectCards card={card}/>
+            ))}
+          </Grid>
+          <br/><br/><br/>
+
+        <Typography component="h1" variant="h3" style={{color: '#000080'}} gutterBottom>
+            <i>UpComing Projects</i>
+        </Typography>
+        <Grid container spacing={4}>
+            {upcomingProjects.map((card) => (
+              <ProjectCards card={card}/>
+            ))}
+          </Grid>
+          <br/><br/><br/>
+
+
+        <Typography component="h1" variant="h3" style={{color: '#8B0000'}} gutterBottom>
+            <i>Past Projects</i>
+        </Typography>
+        <Grid container spacing={4}>
+            {pastProjects.map((card) => (
+              <ProjectCards card={card}/>
+            ))}
+          </Grid>
+          <br/><br/><br/>
+        </Container> 
+        </main>
+        </Container>
+      <br/>
+      {/* </header> */}
+    </React.Fragment> 
+  );
+}
+
+
 const sections = [
   { title: 'Quick Search', url: '#/home' },
   { title: 'Employee Profile', url: '#/home' },
@@ -67,7 +137,7 @@ const mainFeaturedPost = {
   linkText: 'Continue reading…',
 };
 
-const featuredPosts = [
+const liveProjects = [
   {
     title: 'Sentiment analysis product rating',
     tag: 'AI/ML',
@@ -91,7 +161,10 @@ const featuredPosts = [
       'Weather forecasting systems use a combination of science and technology to make accurate predictions on weather conditions of a particular location at a particular time. Weather forecast systems and applications predict weather conditions based on multiple parameters, such as pressure, temperature, humidity, wind speed, etc.',
     image: 'https://www.sciencenewsforstudents.org/wp-content/uploads/2019/11/860_main_weather_and_prediction.png',
     imageText: 'Weather forecasting system',
-  },
+  }
+]
+
+const upcomingProjects =[
   {
     title: 'Image encryption using AES algorithm',
     tag: 'DS Oriented',
@@ -118,76 +191,30 @@ const featuredPosts = [
   },
 ];
 
-export default function Home() {
-  const classes = useStyles();
 
-  return (
-    <React.Fragment>
-      <CssBaseline />     
-      {/* <header className="App-header"> */}
-       <Container maxWidth="lg">
-        <Header title="WooW Analytics" sections={sections} />
-        <main>
-        <MainFeaturedPost post={mainFeaturedPost} />
-        <Container className={classes.cardGrid} maxWidth="lg">
-          <Grid container spacing={4}>
-            {featuredPosts.map((card) => (
-              <Grid item key={card.title} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={card.image}
-                    title={card.title}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                     {card.title}
-                    </Typography>
-                    <Chip label={card.tag} />
-                    {/* <Typography align="center">
-                    {card.tag}
-                    </Typography> */}
-                    <Typography align="center">
-                    {card.description}
-                    </Typography>
-                  </CardContent>
-                  <center>
-                  <CardActions> 
-                      <Button 
-                        variant="contained"  
-                        size="small" 
-                        color="primary"
-                        onClick={() => {window.open('/#/')}}
-                      >
-                          Read More
-                      </Button> 
-                      <Button 
-                        variant="contained"  
-                        size="small" 
-                        color="primary"
-                        onClick={() => {window.open('/#/')}}
-                      >
-                          Apply Now
-                      </Button> 
-                      <Button 
-                        variant="contained"  
-                        size="small" 
-                        color="primary"
-                        onClick={() => {window.open('/#/')}}
-                      >
-                          Connect Team
-                      </Button> 
-                  </CardActions>
-                  </center>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container> 
-        </main>
-        </Container>
-      <br/>
-      {/* </header> */}
-    </React.Fragment> 
-  );
-}
+const pastProjects = [
+  {
+    title: 'Sentiment analysis product rating',
+    tag: 'AI/ML',
+    description:
+      'This project aims to develop a sentiment analysis system for product rating. It is an e-commerce web application. The main goal of this sentiment analysis system is to understand the hidden sentiments of customers in feedback and comments and analyze their product rating patterns.',
+    image: 'https://cdn.analyticsvidhya.com/wp-content/uploads/2020/08/Sentiment-Analysis-scaled.jpg',
+    imageText: 'Sentiment analysis for product rating',
+  },
+  {
+    title: 'Fingerprint-based ATM system',
+    tag: 'IOT',
+    description:
+      'This project is a desktop application that uses the fingerprint of users for authentication. Since each individual has a unique fingerprint, this method of using fingerprint as a means of authentication to access your ATM is safer and more secure than using an ATM card. Users need not carry their ATM cards with them at all times – they can use their fingerprint to access ATM services. ',
+    image: 'https://api.army.mil/e2/c/images/2020/02/04/576140/original.jpg',
+    imageText: 'Fingerprint-based ATM system',
+  },
+  {
+    title: 'Weather forecasting system',
+    tag: 'AI/ML',
+    description:
+      'Weather forecasting systems use a combination of science and technology to make accurate predictions on weather conditions of a particular location at a particular time. Weather forecast systems and applications predict weather conditions based on multiple parameters, such as pressure, temperature, humidity, wind speed, etc.',
+    image: 'https://www.sciencenewsforstudents.org/wp-content/uploads/2019/11/860_main_weather_and_prediction.png',
+    imageText: 'Weather forecasting system',
+  }
+]
