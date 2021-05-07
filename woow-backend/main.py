@@ -5,16 +5,16 @@ from datetime import datetime
 from os import walk
 from elasticsearch import Elasticsearch
 
-proj = {
-    'name': 'Parabellum',
-    'project-id': '311',
-    'lead': 'Darshan',
-}
+# proj = {
+#     'name': 'Parabellum',
+#     'project-id': '311',
+#     'lead': 'Darshan',
+# }
 
 es = Elasticsearch(
     cloud_id="parabellum-cluster:YXAtc291dGgtMS5hd3MuZWxhc3RpYy1jbG91ZC5jb206OTI0MyQ0OWVkMGQ0ZDdmOGQ0YWFiYjAwZTAwODc1NDljZDlhZiQzZTE1ZTBlMzdkMDQ0NGFhYjA1MmFkNjA2ZDM1MTA0Mw==",
     http_auth=("elastic", "i0RTOYaJjgvfgYds7XK3Xyy4"),
-    ) #This will change to new instance
+    ) 
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -24,9 +24,10 @@ CORS(app, support_credentials=True)
 def hello():
     return "Welcome to WooW Analytics Service by Team Parabellum!"
 
-@app.route('/addProject/<id>')
+@app.route('/addProject/<id>', methods=['GET', 'POST'])
 @cross_origin(support_credentials=True)  
 def addProject(id): 
+    proj = request.get_json(silent=True)
     res = es.index(index="project", id=id, body=proj)
    
     return res["result"]
