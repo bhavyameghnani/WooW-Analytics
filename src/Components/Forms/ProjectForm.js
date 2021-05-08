@@ -54,18 +54,6 @@ const sections = [
 
 
 
-    // ServiceCall.addProject(values).then((response)=>{
-        // if(response.data === "False"){
-        // alert("Project addition failed!")
-        // }
-        // else{
-        // // console.log(response.data)
-        // //  localStorage.setItem('user_key', response.id);
-        // window.open("#/home","_self")
-        // }
-
-    // })
-
 const ProjectForm = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
@@ -74,8 +62,7 @@ const ProjectForm = () => {
                 alert("Project addition failed!")
                 }
                 else{
-                // console.log(response.data)
-                //  localStorage.setItem('user_key', response.id);
+                alert("Project Added!")
                 window.open("#/home","_self")
                 }
         })
@@ -106,7 +93,7 @@ const ProjectForm = () => {
 
                 <Form.Item
                     label="Brief Description"
-                    name="desc"
+                    name="summary"
                 >
                    <TextArea rows={4} />
 
@@ -132,7 +119,7 @@ const ProjectForm = () => {
                 </Form.Item>
 
                 <Form.Item
-                    name="technostack"
+                    name="technology"
                     label="Technology Stack"
                     rules={[
                     {
@@ -154,20 +141,19 @@ const ProjectForm = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item label="Estimated Hours">
-                    <Form.Item name="hours" noStyle>
+                    <Form.Item name="noofhours" noStyle>
                     <InputNumber min={1} max={100} />
                     </Form.Item>
                     <span className="ant-form-text"> hours</span>
                 </Form.Item>
 
-                <Form.Item name="complexity" label="Complexity">
+                <Form.Item name="projectcomplexity" label="Complexity">
                     <Slider
                     marks={{
-                        0: 'LEVEL 1',
-                        20: 'LEVEL 2',
-                        50: 'LEVEL 3',
-                        80: 'LEVEL 4',
-                        100: 'LEVEL 5',
+                        0: 'Easy',
+                        50: 'Medium',
+                        100: 'Hard'
+                    
                     }}
                     />
                 </Form.Item>
@@ -196,6 +182,13 @@ const ProjectForm = () => {
                         </p>
                         <p className="ant-upload-text">Click or drag file to this area to upload</p>
                     </Upload.Dragger>
+                    </Form.Item>
+                    OR
+                    <Form.Item
+                        label="Image URL"
+                        name="imgURL"
+                    >
+                        <Input/>
                     </Form.Item>
                 </Form.Item>
 
