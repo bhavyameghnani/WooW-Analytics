@@ -28,13 +28,23 @@ def hello():
 """
 Project Related API's
 """
-@app.route('/addProject', methods=['GET', 'POST'])
+@app.route('/addProject', methods=['POST'])
 @cross_origin(support_credentials=True)  
 def addProject(): 
     proj = request.get_json(silent=True)
     res = es.index(index="project", body=proj)
    
     return res
+
+
+@app.route('/updateProject/<id>', methods=['POST'])
+@cross_origin(support_credentials=True)
+def updateProject(id):
+    proj = request.get_json(silent=True)
+    res = es.index(index="project", id=id, body=proj)
+
+    return res
+
 
 @app.route('/getProject/<id>', methods=['GET'])
 @cross_origin(support_credentials=True)  
@@ -56,6 +66,30 @@ def getAllProjects():
     res = es.search(index="project", body=match_all)
     return jsonify(res["hits"]["hits"])
 
+@app.route('/deleteProject/<id>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def deleteProject(id):
+    res = es.delete(index="project", id=id)
+    return res
+
+
+
+
+
+@app.route('/addUserApplication/<id>', methods=['POST'])
+@cross_origin(support_credentials=True)
+def addUserApplication(id):
+    user = request.get_json(silent=True)
+    taskid = user["_id"]
+
+    doc = es.get(index="project", id=id)
+    projectid=doc["_id"]
+
+    if "applicantlist" not in dict(doc["_source"]).keys():
+        doc["_source"]["applicantlist"]=[]
+    doc["_source"]["applicantlist"].append(taskid)
+    res = es.update(index="project", id=projectid, body={'doc': {'applicantlist': doc["_source"]["applicantlist"]}})
+    return res
 
 
 """
