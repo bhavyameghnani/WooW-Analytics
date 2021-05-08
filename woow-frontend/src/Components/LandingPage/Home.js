@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import ProjectCards from './ProjectCard';
 import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
+import ServiceCall from '../../Service/ServiceCall';
 
 const { TabPane } = Tabs;
 
@@ -59,6 +60,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   const classes = useStyles();
 
+  const [projectData, setProjectData] = React.useState([]);
+
+
+  useEffect(() => {
+      ServiceCall.getAllProjects().then((response)=>{
+        console.log(response.data);
+        setProjectData(response.data)
+    })
+  });
+
   return (
     <React.Fragment>
       <CssBaseline />     
@@ -92,8 +103,13 @@ export default function Home() {
             <i>Past Projects</i>
         </Typography>
         <Grid container spacing={4}>
-            {pastProjects.map((card) => (
-              <ProjectCards card={card}/>
+            {projectData.map((card) => (
+              (() => {
+                if(card['_source']['status'].includes('Previous')){
+                  
+                  return(<ProjectCards card={card['_source']} pid={card['_id']}/>)
+                }
+              })()
             ))}
           </Grid>
     </TabPane>
@@ -102,9 +118,13 @@ export default function Home() {
                 <i>Live Projects</i>
             </Typography>
             <Grid container spacing={4}>
-              {liveProjects.map((card) => (
-                <ProjectCards card={card}/>
-              ))}
+            {projectData.map((card) => (
+              (() => {
+                if(card['_source']['status'].includes('Live')){
+                  return(<ProjectCards card={card['_source']}/>)
+                }
+              })()
+            ))}
             </Grid>
     </TabPane>
     <TabPane tab="UpComing Projects" key="3">
@@ -112,9 +132,13 @@ export default function Home() {
               <i>UpComing Projects</i>
           </Typography>
           <Grid container spacing={4}>
-              {upcomingProjects.map((card) => (
-                <ProjectCards card={card}/>
-              ))}
+          {projectData.map((card) => (
+              (() => {
+                if(card['_source']['status'].includes('Coming')){
+                  return(<ProjectCards card={card['_source']}/>)
+                }
+              })()
+            ))}
             </Grid>
     </TabPane>
   </Tabs>

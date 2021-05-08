@@ -30,26 +30,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectCards(props) {
   const classes = useStyles();
-  const { card } = props;
+  const { card, pid } = props;
 
   return (
       <Grid item key={card.title} xs={12} sm={6} md={4}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={card.image}
+            image={card.imgURL}
             title={card.title}
           />
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
               {card.title}
             </Typography>
-            <Chip label={card.tag} />
-            {/* <Typography align="center">
-            {card.tag}
-            </Typography> */}
+            {console.log(pid,card)}
+            { card.technology &&
+            
+            card.technology.map((tech)=>(
+              <Chip label={tech} />
+            ))}
             <Typography align="center">
-            {card.description}
+            {card.summary}
             </Typography>
           </CardContent>
           <center>
@@ -58,7 +60,7 @@ export default function ProjectCards(props) {
                 variant="contained"  
                 size="small" 
                 color="primary"
-                onClick={() => {window.open('/#/')}}
+                onClick={() => {window.open('/#/'+pid)}}
               >
                   Read More
               </Button> 
