@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath woow-backend app:app
