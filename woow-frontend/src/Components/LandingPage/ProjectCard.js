@@ -56,14 +56,16 @@ export default function ProjectCards(props) {
           </CardContent>
           <center>
           <CardActions> 
+            { pid && 
               <Button 
                 variant="contained"  
                 size="small" 
                 color="primary"
-                onClick={() => {window.open('/#/'+pid)}}
+                onClick={() => {window.open('/#/projectPage/'+pid)}}
               >
                   Read More
               </Button> 
+              }
               <Button 
                 variant="contained"  
                 size="small" 

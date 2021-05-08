@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -32,6 +32,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useParams } from "react-router";
+import ServiceCall from '../../Service/ServiceCall';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -79,9 +82,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectPage() {
     const classes = useStyles();
-
+    const pid = useParams();
+    console.log(pid);
     const [open, setOpen] = React.useState(false);
     const [complexity, setComplexity] = React.useState('');
+    const [projectData, setProjectData] = React.useState();
+
+
+    useEffect(() => {
+      ServiceCall.getProject(pid.pid).then((response)=>{
+        console.log(response.data);
+        setProjectData(response.data)
+    })
+  });
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -109,10 +122,10 @@ export default function ProjectPage() {
             <Grid item xs={false}  md={8}>
                 <Paper className={classes.paper}>
                     <Typography gutterBottom variant="h4" component="h2">
-                        <i><b>Project Summary</b></i>
+                        <i><b>{projectData && projectData['_source']['title']}</b></i>
                     </Typography>
                     <Typography gutterBottom variant="h7" component="h3">
-                        Weather forecasting systems use a combination of science and technology to make accurate predictions on weather conditions of a particular location at a particular time. Weather forecast systems and applications predict weather conditions based on multiple parameters, such as pressure, temperature, humidity, wind speed, etc.
+                        {projectData && projectData['_source']['summary']}
                     </Typography>
                 </Paper>
                 <br/>
@@ -253,6 +266,22 @@ export default function ProjectPage() {
                         </Dialog>
                     </Paper>
                     </Grid>
+                    <Paper className={classes.paper}>
+                  <Typography gutterBottom variant="h4" component="h2">
+                    <i><b>Top Applicants</b></i>
+                  </Typography>
+                  <center>
+
+                  <ReactRoundedImage image="https://ca.slack-edge.com/T0213T10W8J-U020X6RTE7Q-1394fcd8e78c-512" roundedSize="0" imageWidth="110" imageHeight="110"/>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      <i>Brian - Machine Learning Developer</i>
+                    </Typography>
+                    <ReactRoundedImage image="https://ca.slack-edge.com/T0213T10W8J-U021A2CG2TW-feee11b5c194-512" roundedSize="0" imageWidth="110" imageHeight="110"/>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      <i>Ishani - Backend Developer</i>
+                    </Typography>
+                  </center>          
+                </Paper> 
                 </Grid>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -304,6 +333,7 @@ export default function ProjectPage() {
                 </Paper> 
 
                 <br/>
+            
 
                 
                 

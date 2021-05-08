@@ -18,7 +18,7 @@ function App() {
             <Route exact path="/home" component={Home}/>
             <Route exact path="/addProject" component={ProjectForm}/>
             <Route exact path="/employeesProfile" component={EmployeeProfile}/>
-            <Route exact path="/projectPage" component={ProjectPage}/>
+            <Route exact path="/projectPage/:pid" component={ProjectPage}/>
           </Switch>
       </HashRouter>
       {/* </header> */}

@@ -11,6 +11,8 @@ class ServiceCall {
     }
 
 
+
+
     userSignIn(userLoginDetails) {
         return http.post("/login", userLoginDetails, {
             headers: {
@@ -21,6 +23,22 @@ class ServiceCall {
 
     addProject(projectDetails) {
         return http.post("/addProject", projectDetails, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    }
+
+    getProject(id){
+        return http.get("/getProject/"+id, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    }
+
+    getAllUser(){
+        return http.get("/getAllUser", {
             headers: {
                 "Content-Type": "multipart/form-data"
             }

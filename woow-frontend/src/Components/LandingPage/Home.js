@@ -121,7 +121,7 @@ export default function Home() {
             {projectData.map((card) => (
               (() => {
                 if(card['_source']['status'].includes('Live')){
-                  return(<ProjectCards card={card['_source']}/>)
+                  return(<ProjectCards card={card['_source']} pid={card['_id']}/>)
                 }
               })()
             ))}
@@ -135,7 +135,7 @@ export default function Home() {
           {projectData.map((card) => (
               (() => {
                 if(card['_source']['status'].includes('Coming')){
-                  return(<ProjectCards card={card['_source']}/>)
+                  return(<ProjectCards card={card['_source']} pid={card['_id']}/>)
                 }
               })()
             ))}

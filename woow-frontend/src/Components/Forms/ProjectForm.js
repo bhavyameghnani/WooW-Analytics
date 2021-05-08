@@ -63,7 +63,8 @@ const ProjectForm = () => {
                 }
                 else{
                 alert("Project Added!")
-                window.open("#/home","_self")
+                console.log(response)
+                //window.open("#/home","_self")
                 }
         })
       };
@@ -153,7 +154,6 @@ const ProjectForm = () => {
                         0: 'Easy',
                         50: 'Medium',
                         100: 'Hard'
-                    
                     }}
                     />
                 </Form.Item>
@@ -202,6 +202,22 @@ const ProjectForm = () => {
                     <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                     </Upload>
+                </Form.Item>
+                
+                <Form.Item
+                    name="status"
+                    label="Status"
+                    rules={[
+                    {
+                        type: 'array',
+                    },
+                    ]}
+                >
+                    <Select mode="multiple" prefix={<UserOutlined className="site-form-item-icon" />} >
+                        <Option value="Live">Live</Option>
+                        <Option value="Previous">Previous</Option>
+                        <Option value="Coming">Coming</Option>
+                    </Select>
                 </Form.Item>
 
                 <Form.Item
