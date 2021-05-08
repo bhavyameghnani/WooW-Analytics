@@ -64,7 +64,7 @@ export default function Home() {
       <CssBaseline />     
       {/* <header className="App-header"> */}
        <Container maxWidth="lg">
-        <Header title="WooW Analytics" sections={sections} />
+        <Header title="WooW Analytics" />
         <main>
         <MainFeaturedPost post={mainFeaturedPost} />
 
@@ -127,13 +127,6 @@ export default function Home() {
     </React.Fragment> 
   );
 }
-
-
-const sections = [
-  { title: 'Quick Search', url: '#/home' },
-  { title: 'Employee Profile', url: '#/home' },
-  { title: 'Projects Dashboard', url: '#/home' },
-];
 
 const mainFeaturedPost = {
   title: 'WooW Analytics by Team Parabellum',

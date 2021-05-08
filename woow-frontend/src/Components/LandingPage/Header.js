@@ -27,10 +27,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const sections = [
+  { title: 'Quick Search', url: '#/home' },
+  { title: 'Employees Profile', url: '#/employees-profile' },
+  { title: 'Projects Dashboard', url: '#/home' },
+];
 
 export default function Header(props) {
   const classes = useStyles();
-  const { sections, title } = props;
+  const { title } = props;
 
   return (
     <React.Fragment>
