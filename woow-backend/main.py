@@ -43,6 +43,22 @@ def getProject(id):
     res = es.get(index="project", id=id)
     return res
 
+
+
+@app.route('/getAllProjects', methods=['GET'])
+@cross_origin(support_credentials=True)
+def getAllProjects():
+    # declare a filter query dict object
+    match_all = {
+        "query": {
+            "match_all": {}
+        }
+    }
+    res = es.search(index="project", body=match_all)
+    return jsonify(res["hits"]["hits"])
+
+
+
 """
 User Management API's
 """
@@ -69,6 +85,18 @@ def getUser(id):
     res = es.get(index="user", id=id)
     return res["_source"]
 
+@app.route('/getAllUser', methods=['GET'])
+@cross_origin(support_credentials=True)
+def getAllUser():
+    # declare a filter query dict object
+    match_all = {
+        "size": 100,
+        "query": {
+            "match_all": {}
+        }
+    }
+    res = es.search(index="user", body=match_all)
+    return jsonify(res["hits"]["hits"])
 
 
 """
