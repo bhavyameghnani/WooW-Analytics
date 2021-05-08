@@ -4,7 +4,6 @@ import json, os, base64
 from datetime import datetime 
 from os import walk
 from elasticsearch import Elasticsearch
-import dashboard_functions
 from flask import jsonify
 
 # proj = {
@@ -29,11 +28,11 @@ def hello():
 """
 Project Related API's
 """
-@app.route('/addProject/<id>', methods=['GET', 'POST'])
+@app.route('/addProject', methods=['GET', 'POST'])
 @cross_origin(support_credentials=True)  
-def addProject(id): 
+def addProject(): 
     proj = request.get_json(silent=True)
-    res = es.index(index="project", id=id, body=proj)
+    res = es.index(index="project", body=proj)
    
     return res
 
@@ -49,16 +48,37 @@ User Management API's
 @app.route('/addUser', methods=['GET', 'POST'])
 @cross_origin(support_credentials=True)
 def addUser():
-    proj = request.get_json(silent=True)
-    res = es.index(index="user", body=proj)
+    user = request.get_json(silent=True)
+    res = es.index(index="user", body=user)
 
     return res
+
+@app.route('/login', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def login():
+    login_user = request.get_json(silent=True)
+    users = es.search(index="user", body = {
+    'size' : 10000,
+    'query': {
+        'match_all' : {}
+    }
+    })
+
+    print(login_user)
+    for user in users['hits']['hits']:
+        print(user['_source'])
+        if(user['_source']['Email'] == login_user['Email'] and  user['_source']['Password'] == login_user['Password']):
+            print("logged",user['_source'])
+            return user['_source']
+
+    return "False"
+
 
 @app.route('/updateUser/<id>', methods=['GET', 'POST'])
 @cross_origin(support_credentials=True)
 def updateUser(id):
-    proj = request.get_json(silent=True)
-    res = es.index(index="user", id=id, body=proj)
+    user = request.get_json(silent=True)
+    res = es.index(index="user", id=id, body=user)
 
     return res
 

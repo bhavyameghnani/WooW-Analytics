@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import ServiceCall from '../../Service/ServiceCall';
 
 import {
   Form,
@@ -22,6 +23,7 @@ import {
   Col
 } from 'antd';
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+
 
 const formItemLayout = {
     labelCol: {
@@ -49,10 +51,34 @@ const sections = [
 { title: 'Employee Profile', url: '#/home' },
 { title: 'Projects Dashboard', url: '#/home' },
 ];
-  
+
+
+
+    // ServiceCall.addProject(values).then((response)=>{
+        // if(response.data === "False"){
+        // alert("Project addition failed!")
+        // }
+        // else{
+        // // console.log(response.data)
+        // //  localStorage.setItem('user_key', response.id);
+        // window.open("#/home","_self")
+        // }
+
+    // })
+
 const ProjectForm = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+        ServiceCall.addProject(values).then((response)=>{
+            if(response.data === "False"){
+                alert("Project addition failed!")
+                }
+                else{
+                // console.log(response.data)
+                //  localStorage.setItem('user_key', response.id);
+                window.open("#/home","_self")
+                }
+        })
       };
       return (
         <React.Fragment>
@@ -205,5 +231,4 @@ const ProjectForm = () => {
     </React.Fragment> 
       );
 }
-
-export default ProjectForm 
+ export default ProjectForm
