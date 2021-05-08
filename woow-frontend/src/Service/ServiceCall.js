@@ -1,9 +1,9 @@
 import http from './http-common-servicecall'
 
-class ServiceCall{
-    
-    userSignUp(userDetails){
-        return http.post("/userSignUp", userDetails, {
+class ServiceCall {
+
+    userSignUp(userDetails) {
+        return http.post("/addUser", userDetails, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
@@ -11,15 +11,23 @@ class ServiceCall{
     }
 
 
-    userSignIn(userLoginDetails){
-        return http.post("/userSignIn", userLoginDetails, {
+    userSignIn(userLoginDetails) {
+        return http.post("/login", userLoginDetails, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         });
     }
 
-    uploadSnap(imageSrc){
+    addProject(projectDetails) {
+        return http.post("/addProject", projectDetails, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    }
+
+    uploadSnap(imageSrc) {
         return http.post("/uploadSnap", imageSrc, {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -27,8 +35,8 @@ class ServiceCall{
         });
     }
 
-    getSnap(){
-        return http.post("/getSnap/snap",  {
+    getSnap() {
+        return http.post("/getSnap/snap", {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
@@ -36,7 +44,7 @@ class ServiceCall{
     }
 
 
-    challenge_submission(submission_details){
+    challenge_submission(submission_details) {
         return http.post("/challenge_submission", submission_details, {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -44,7 +52,7 @@ class ServiceCall{
         });
     }
 
-    fetchChallenges(){
+    fetchChallenges() {
         return http.get("/fetchChallenges", {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -53,7 +61,7 @@ class ServiceCall{
     }
 
 
-    fetchChallengesEnrolled(){
+    fetchChallengesEnrolled() {
         return http.get("/fetchChallengesEnrolled", {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -62,15 +70,15 @@ class ServiceCall{
     }
 
 
-    fetchUserName(userId){
-        return http.post("/fetchUserName",userId,{
+    fetchUserName(userId) {
+        return http.post("/fetchUserName", userId, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         });
     }
 
-    adminAddChallenge(admin_challenges){
+    adminAddChallenge(admin_challenges) {
         return http.post("/adminAddChallenge", admin_challenges, {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -79,7 +87,7 @@ class ServiceCall{
     }
 
 
-    userChallengesEnrolled(challenges_enrolled){
+    userChallengesEnrolled(challenges_enrolled) {
         return http.post("/userChallengesEnrolled", challenges_enrolled, {
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -88,7 +96,7 @@ class ServiceCall{
     }
 
 
-    checkUserChallengesEnrolled(user_challenge){
+    checkUserChallengesEnrolled(user_challenge) {
         return http.post("/checkUserChallengesEnrolled", user_challenge, {
             headers: {
                 "Content-Type": "multipart/form-data"
