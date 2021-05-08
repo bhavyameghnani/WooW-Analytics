@@ -4,6 +4,8 @@ import json, os, base64
 from datetime import datetime 
 from os import walk
 from elasticsearch import Elasticsearch
+import dashboard_functions
+from flask import jsonify
 
 # proj = {
 #     'name': 'Parabellum',
@@ -24,19 +26,94 @@ CORS(app, support_credentials=True)
 def hello():
     return "Welcome to WooW Analytics Service by Team Parabellum!"
 
+"""
+Project Related API's
+"""
 @app.route('/addProject/<id>', methods=['GET', 'POST'])
 @cross_origin(support_credentials=True)  
 def addProject(id): 
     proj = request.get_json(silent=True)
     res = es.index(index="project", id=id, body=proj)
    
-    return res["result"]
+    return res
 
-@app.route('/getProject/<id>')
+@app.route('/getProject/<id>', methods=['GET'])
 @cross_origin(support_credentials=True)  
 def getProject(id): 
     res = es.get(index="project", id=id)
+    return res
+
+"""
+User Management API's
+"""
+@app.route('/addUser', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def addUser():
+    proj = request.get_json(silent=True)
+    res = es.index(index="user", body=proj)
+
+    return res
+
+@app.route('/updateUser/<id>', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def updateUser(id):
+    proj = request.get_json(silent=True)
+    res = es.index(index="user", id=id, body=proj)
+
+    return res
+
+
+@app.route('/getUser/<id>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def getUser(id):
+    res = es.get(index="user", id=id)
     return res["_source"]
 
 
-app.run(port=5000, debug=True)
+
+"""
+Task Management API's
+"""
+@app.route('/addTask/<id>', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def addTask(id):
+    task = request.get_json(silent=True)
+    res1 = es.index(index="task", body=task)
+    taskid = res1["_id"]
+
+    doc = es.get(index="project", id=id)
+    projectid=doc["_id"]
+    doc["_source"]["projectrequirement"].append(taskid)
+    res = es.index(index="project", id=int(projectid), body=json.dumps(doc["_source"]))
+    return res
+
+
+@app.route('/updateTask/<id>', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def updateTask(id):
+    proj = request.get_json(silent=True)
+    res = es.index(index="task", id=id, body=proj)
+    return res
+
+
+@app.route('/getTask/<id>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def getTaskWithTaskID(id):
+    res = es.get(index="task", id=id)
+    return res
+
+
+
+@app.route('/getProjectTask/<id>', methods=['GET'])
+@cross_origin(support_credentials=True)
+def getTaskWithProject(id):
+    doc = es.get(index="project", id=id)
+    tasklist=[]
+    for taskid in doc["_source"]["projectrequirement"]:
+        tasklist.append(es.get(index="task", id=taskid))
+
+    return jsonify(tasklist)
+
+
+if __name__ == "__main__":
+    app.run(port=5000, debug=True)

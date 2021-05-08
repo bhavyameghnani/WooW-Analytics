@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "62815557-b285-474b-85ad-85c48e70288e",
+		"name": "WooW Dashboard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"DemoDCProject\",\r\n    \"summary\":\"Summary of project\",\r\n    \"domain\":[\"ai\",\"frontend\"],\r\n    \"technology\":[\"java\",\"python\"],\r\n    \"projectcomplexity\":5,\r\n    \"noofhours\":256,\r\n    \"status\":\"planning\",\r\n    \"teaminfo\":[\"1\",\"3\"],\r\n    \"projectrequirement\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/addProject/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"addProject",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/getProject/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"getProject",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Devang\",\r\n    \"email\":\"devang@bad2.in\",\r\n    \"primaryskills\":[\"java\",\"python\"],\r\n    \"secondaryskills\":[\"c\",\"cpp\"],\r\n    \"yoe\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/addUser",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"addUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/getUser/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"getUser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Devang\",\r\n    \"email\":\"devang@bad2.in\",\r\n    \"primaryskills\":[\"java\",\"python\"],\r\n    \"secondaryskills\":[\"c\",\"cpp\"],\r\n    \"yoe\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/updateUser/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"updateUser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Add Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\":\"developer\",\r\n    \"task\":\"build backend\",\r\n    \"tech\":[\"flask\",\"elasticsearch\"],\r\n    \"complexity\":2,\r\n    \"noofhours\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/addTask/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"addTask",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"position\":\"developer\",\r\n    \"task\":\"build backend\",\r\n    \"tech\":[\"flask\",\"elasticsearch\"],\r\n    \"complexity\":2,\r\n    \"noofhours\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/addTask/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"addTask",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task with TaskID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/getTask/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"getTask",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task with ProjectID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/getProjectTask/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"getProjectTask",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://127.0.0.1:5000"
+		}
+	]
+}
