@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
 }));
+
 
 export default function Header(props) {
   const classes = useStyles();
@@ -47,9 +49,11 @@ export default function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button color="inherit" variant="outlined" size="small">
-          Know More
-        </Button>
+        <NavLink to="/addProject">
+          <Button color="inherit" variant="outlined" size="small">
+          + NEW PROJECT
+          </Button>
+        </NavLink>
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (

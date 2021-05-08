@@ -11,6 +11,11 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import ProjectCards from './ProjectCard';
+import 'antd/dist/antd.css';
+import { Tabs } from 'antd';
+
+const { TabPane } = Tabs;
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,30 +85,10 @@ export default function Home() {
                     )
                 }}
           />
-
         <Container className={classes.cardGrid} maxWidth="lg">
-          <Typography component="h1" variant="h3" style={{color: '#006400'}} gutterBottom>
-              <i>Live Projects</i>
-          </Typography>
-          <Grid container spacing={4}>
-            {liveProjects.map((card) => (
-              <ProjectCards card={card}/>
-            ))}
-          </Grid>
-          <br/><br/><br/>
-
-        <Typography component="h1" variant="h3" style={{color: '#000080'}} gutterBottom>
-            <i>UpComing Projects</i>
-        </Typography>
-        <Grid container spacing={4}>
-            {upcomingProjects.map((card) => (
-              <ProjectCards card={card}/>
-            ))}
-          </Grid>
-          <br/><br/><br/>
-
-
-        <Typography component="h1" variant="h3" style={{color: '#8B0000'}} gutterBottom>
+        <Tabs defaultActiveKey="2" centered>
+    <TabPane tab="Past Projects" key="1">
+    <Typography component="h1" variant="h3" style={{color: '#8B0000'}} gutterBottom>
             <i>Past Projects</i>
         </Typography>
         <Grid container spacing={4}>
@@ -111,7 +96,29 @@ export default function Home() {
               <ProjectCards card={card}/>
             ))}
           </Grid>
-          <br/><br/><br/>
+    </TabPane>
+    <TabPane tab="Live Projects" key="2">
+      <Typography component="h1" variant="h3" style={{color: '#006400'}} gutterBottom>
+                <i>Live Projects</i>
+            </Typography>
+            <Grid container spacing={4}>
+              {liveProjects.map((card) => (
+                <ProjectCards card={card}/>
+              ))}
+            </Grid>
+    </TabPane>
+    <TabPane tab="UpComing Projects" key="3">
+      <Typography component="h1" variant="h3" style={{color: '#000080'}} gutterBottom>
+              <i>UpComing Projects</i>
+          </Typography>
+          <Grid container spacing={4}>
+              {upcomingProjects.map((card) => (
+                <ProjectCards card={card}/>
+              ))}
+            </Grid>
+    </TabPane>
+  </Tabs>
+
         </Container> 
         </main>
         </Container>
