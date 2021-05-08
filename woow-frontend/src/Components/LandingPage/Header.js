@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const sections = [
   { title: 'Quick Search', url: '#/home' },
-  { title: 'Employees Profile', url: '#/employees-profile' },
+  { title: 'Employees Profile', url: '#/employeesProfile' },
   { title: 'Projects Dashboard', url: '#/home' },
 ];
 
