@@ -68,11 +68,11 @@ export default function SignInSide() {
 
     ServiceCall.userSignIn(userLoginDetails).then((response)=>{
         if(response.data === "False"){
-          alert("User is not regitered, Please signup before")
+          alert("User is not registered, Please signup before")
         }
         else{
           // console.log(response.data)
-          localStorage.setItem('user_key', response.name);
+          localStorage.setItem('user_key', response.id);
           window.open("#/home","_self")
         }
 
