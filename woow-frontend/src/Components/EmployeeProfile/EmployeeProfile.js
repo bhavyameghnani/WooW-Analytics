@@ -57,39 +57,3 @@ const mainFeaturedPost = {
   imgText: 'Employee Profile',
   linkText: 'Continue reading…',
 };
-
-
-const employeeData = [
-  {
-    name: 'Bhavya',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Devang',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Darshan',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Anshu',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Bhavya',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Devang',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Darshan',
-    description: 'Frontend Developer'
-  },
-  {
-    name: 'Anshu',
-    description: 'Frontend Developer'
-  },
-]
