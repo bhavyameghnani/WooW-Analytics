@@ -1,7 +1,7 @@
 # WooW-Analytics
 A project for workflow anlaysis with facilitating project resource allocation leveraging a profile matching algorithm for employees to match the best suited project in the organization.
 
-<img src="https://drive.google.com/file/d/1DOuyFwY2631kwxwso_hBH033acShY-Ew/view?usp=sharing" />
+<img src="https://drive.google.com/uc?export=view&id={1DOuyFwY2631kwxwso_hBH033acShY-Ew}" />
 
 # Running locally -
 ## Running Frontend React Server -
