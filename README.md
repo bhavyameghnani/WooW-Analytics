@@ -1,6 +1,9 @@
 # WooW-Analytics
 A project for workflow anlaysis with facilitating project resource allocation leveraging a profile matching algorithm for employees to match the best suited project in the organization.
 
+Deployed Link - https://woow-analytics-frontend.herokuapp.com/
+
+
 <img src="https://drive.google.com/uc?export=view&id=1DOuyFwY2631kwxwso_hBH033acShY-Ew" />
 
 <img src="https://drive.google.com/uc?export=view&id=1SCyjCLRtUQNKlGTSEgX7bbJ-GACitJad" />
