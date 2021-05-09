@@ -53,6 +53,17 @@ class ServiceCall {
         });
     }
 
+
+    getSearchProjects(searchData){
+        let data = new FormData()
+        data.append('keyword', searchData)
+        return http.post("/getSearchProjects", data , {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    }
+
     
 
 }

@@ -73,7 +73,22 @@ def deleteProject(id):
     return res
 
 
-
+@app.route('/getSearchProjects', methods=['GET', 'POST'])
+@cross_origin(support_credentials=True)
+def getSearchProjects():
+    # print(request)
+    keyword = request.form['keyword']
+    print(keyword)
+    body = {
+        "query": {
+            "multi_match": {
+                "query": keyword,
+                "fields": ['summary', 'title', 'technology']
+            }
+        }
+    }
+    res = es.search(index="project", body=body)
+    return jsonify(res['hits']['hits'])
 
 
 @app.route('/addUserApplication/<id>', methods=['POST'])

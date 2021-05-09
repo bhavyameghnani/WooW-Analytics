@@ -44,7 +44,7 @@ export default function ProjectCards(props) {
             <Typography gutterBottom variant="h5" component="h2">
               {card.title}
             </Typography>
-            {console.log(pid,card)}
+            {/* {console.log(pid,card)} */}
             { card.technology &&
             
             card.technology.map((tech)=>(
@@ -70,7 +70,7 @@ export default function ProjectCards(props) {
                 variant="contained"  
                 size="small" 
                 color="primary"
-                onClick={() => {window.open('/#/')}}
+                onClick={() => {window.open('/#/home')}}
               >
                   Apply Now
               </Button> 
@@ -78,7 +78,7 @@ export default function ProjectCards(props) {
                 variant="contained"  
                 size="small" 
                 color="primary"
-                onClick={() => {window.open('/#/')}}
+                onClick={() => {window.open('/#/home')}}
               >
                   Connect Team
               </Button> 

@@ -6,6 +6,7 @@ import Home from './Components/LandingPage/Home';
 import ProjectForm from './Components/Forms/ProjectForm'
 import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import ProjectPage from './Components/ProjectPage/ProjectPage';
+import ProjectDashboard from './Components/ProjectDashboard/ProjectDashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/addProject" component={ProjectForm}/>
             <Route exact path="/employeesProfile" component={EmployeeProfile}/>
             <Route exact path="/projectPage/:pid" component={ProjectPage}/>
+            <Route exact path="/projectDashboard" component={ProjectDashboard}/>
           </Switch>
       </HashRouter>
       {/* </header> */}

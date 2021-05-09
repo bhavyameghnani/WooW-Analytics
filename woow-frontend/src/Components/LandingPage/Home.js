@@ -17,8 +17,6 @@ import ServiceCall from '../../Service/ServiceCall';
 
 const { TabPane } = Tabs;
 
-
-
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -61,6 +59,9 @@ export default function Home() {
   const classes = useStyles();
 
   const [projectData, setProjectData] = React.useState([]);
+  const [searchData, setSearchData] = React.useState([]);
+  const [keyword, setKeywordValue] = React.useState();
+  const [count, setCount] = React.useState(0);
 
 
   useEffect(() => {
@@ -68,7 +69,16 @@ export default function Home() {
         console.log(response.data);
         setProjectData(response.data)
     })
-  });
+    setCount(100);
+  },[]);
+
+  function handleCategory(){
+    console.log(keyword)
+    ServiceCall.getSearchProjects(keyword).then((response)=>{
+      console.log(response.data)
+      setSearchData(response.data)
+    })
+  }
 
   return (
     <React.Fragment>
@@ -85,17 +95,25 @@ export default function Home() {
                 multiline
                 style={{ margin: 40, width: 700}}
                 placeholder="WooW Project Repository Search"
-                // onChange = {(e) => setValue(e.target.value)} 
+                onChange = {(e) => setKeywordValue(e.target.value)} 
                 InputProps={{
                     endAdornment: (
                     <InputAdornment>
                         <IconButton>
-                        <SearchIcon /> {/* onClick={handleCategory} */}
+                        <SearchIcon onClick={()=> handleCategory()} /> {/*  */}
                         </IconButton>
                     </InputAdornment>
                     )
                 }}
           />
+
+          {searchData && 
+            <Grid container spacing={4}>
+            {searchData.map((card) => (
+              <ProjectCards card={card['_source']} pid={card['_id']}/>
+            ))}
+          </Grid>}
+
         <Container className={classes.cardGrid} maxWidth="lg">
         <Tabs defaultActiveKey="2" centered>
     <TabPane tab="Past Projects" key="1">
@@ -106,7 +124,7 @@ export default function Home() {
             {projectData.map((card) => (
               (() => {
                 if(card['_source']['status'].includes('Previous')){
-                  
+
                   return(<ProjectCards card={card['_source']} pid={card['_id']}/>)
                 }
               })()
