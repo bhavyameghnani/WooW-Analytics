@@ -5,6 +5,8 @@ A project for workflow anlaysis with facilitating project resource allocation le
 
 <img src="https://drive.google.com/uc?export=view&id=1SCyjCLRtUQNKlGTSEgX7bbJ-GACitJad" />
 
+<img src="https://drive.google.com/uc?export=view&id=13H9L72VvI1PV1QrPpYT1FdSvGf2-BYCW" />
+
 # Running locally -
 ## Running Frontend React Server -
 
