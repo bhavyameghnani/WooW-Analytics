@@ -5,7 +5,7 @@ from datetime import datetime
 from os import walk
 from elasticsearch import Elasticsearch
 from flask import jsonify
-
+import config
 # proj = {
 #     'name': 'Parabellum',
 #     'project-id': '311',
@@ -13,8 +13,8 @@ from flask import jsonify
 # }
 
 es = Elasticsearch(
-    cloud_id="parabellum-cluster:YXAtc291dGgtMS5hd3MuZWxhc3RpYy1jbG91ZC5jb206OTI0MyQ0OWVkMGQ0ZDdmOGQ0YWFiYjAwZTAwODc1NDljZDlhZiQzZTE1ZTBlMzdkMDQ0NGFhYjA1MmFkNjA2ZDM1MTA0Mw==",
-    http_auth=("elastic", "i0RTOYaJjgvfgYds7XK3Xyy4"),
+    cloud_id=config.CLOUD_ID,
+    http_auth=(config.USERNAME, config.PASSWORD),
     ) 
 
 app = Flask(__name__)
